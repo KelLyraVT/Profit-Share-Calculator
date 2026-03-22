@@ -1,0 +1,342 @@
+:root {
+  --bg-top: #f4efe3;
+  --bg-bottom: #d9e4d8;
+  --surface: rgba(255, 252, 246, 0.84);
+  --surface-strong: rgba(255, 250, 241, 0.96);
+  --border: rgba(35, 52, 39, 0.12);
+  --text: #1d2a22;
+  --muted: #5f6e64;
+  --accent: #255c43;
+  --accent-strong: #173f2d;
+  --accent-soft: #d8ebe0;
+  --shadow: 0 24px 70px rgba(29, 42, 34, 0.12);
+  --radius-large: 28px;
+  --radius-medium: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Manrope", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.7), transparent 32%),
+    linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(110deg, rgba(37, 92, 67, 0.08), transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(245, 190, 92, 0.22), transparent 18%);
+}
+
+.page-shell {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 48px 20px 64px;
+}
+
+.hero-card,
+.calculator-card {
+  backdrop-filter: blur(20px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow);
+}
+
+.hero-card {
+  padding: 36px;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+h1 {
+  max-width: 14ch;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  line-height: 0.96;
+}
+
+.hero-copy {
+  max-width: 58ch;
+  margin: 18px 0 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.calculator-card {
+  padding: 26px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.15fr) minmax(280px, 0.85fr);
+  gap: 22px;
+}
+
+.input-panel,
+.results-panel {
+  background: var(--surface-strong);
+  border: 1px solid rgba(35, 52, 39, 0.08);
+  border-radius: var(--radius-medium);
+  padding: 22px;
+}
+
+.input-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.step-card {
+  display: grid;
+  gap: 18px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(35, 52, 39, 0.08);
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.step-heading {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.step-heading h2 {
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+}
+
+.step-copy {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.step-number {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #f7fbf8;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+.field-group {
+  display: grid;
+  gap: 8px;
+}
+
+label {
+  font-weight: 800;
+  font-size: 0.94rem;
+}
+
+input {
+  width: 100%;
+  padding: 15px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(37, 92, 67, 0.16);
+  background: rgba(255, 255, 255, 0.88);
+  font: inherit;
+  color: var(--text);
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: rgba(37, 92, 67, 0.72);
+  box-shadow: 0 0 0 4px rgba(37, 92, 67, 0.12);
+  transform: translateY(-1px);
+}
+
+.hint,
+.formula-note,
+.form-message {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.inline-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--accent-soft);
+}
+
+.inline-result-label {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.inline-result-value {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.3rem;
+  color: var(--accent-strong);
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 20px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+.primary-button {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #f7fbf8;
+  box-shadow: 0 16px 32px rgba(23, 63, 45, 0.22);
+}
+
+.secondary-button {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.results-panel {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+}
+
+.result-label {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+.result-value {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 0.94;
+}
+
+.result-breakdown {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.result-breakdown div,
+.formula-card,
+.breakdown-card,
+.explanation-card {
+  border-radius: 18px;
+  border: 1px solid rgba(35, 52, 39, 0.08);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.result-breakdown div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+}
+
+.result-breakdown dt,
+.result-breakdown dd {
+  margin: 0;
+}
+
+.result-breakdown dt {
+  color: var(--muted);
+}
+
+.result-breakdown dd {
+  font-weight: 800;
+}
+
+.formula-card,
+.breakdown-card,
+.explanation-card {
+  padding: 18px;
+}
+
+.breakdown-line,
+.explanation-card p {
+  margin: 0 0 10px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.breakdown-line:last-child,
+.explanation-card p:last-child {
+  margin-bottom: 0;
+}
+
+code {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 860px) {
+  .page-shell {
+    padding: 24px 16px 40px;
+  }
+
+  .hero-card,
+  .calculator-card {
+    border-radius: 22px;
+  }
+
+  .hero-card,
+  .calculator-card,
+  .input-panel,
+  .results-panel {
+    padding: 20px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

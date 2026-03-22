@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profit Share Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero-card">
+      <p class="eyebrow">Profit Share Tool</p>
+      <h1>Profit Share Calculator</h1>
+      <p class="hero-copy">
+        Calculate Corporate Factor first, then use it with PF and Base Salary to estimate profit share instantly.
+      </p>
+    </section>
+
+    <section class="calculator-card">
+      <div class="grid">
+        <form id="bonus-form" class="input-panel" novalidate>
+          <section class="step-card">
+            <div class="step-heading">
+              <span class="step-number">1</span>
+              <div>
+                <h2>Calculate Corporate Factor</h2>
+                <p class="step-copy">Enter the three percentage inputs below to calculate the Corporate Factor first.</p>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label for="roic">ROIC (%)</label>
+              <input
+                id="roic"
+                name="roic"
+                type="number"
+                step="0.01"
+                inputmode="decimal"
+                placeholder="12.50"
+                required
+              >
+              <p class="hint">Return on Invested Capital, entered as a percentage. Enter <strong>12.5</strong> for 12.5%.</p>
+            </div>
+
+            <div class="field-group">
+              <label for="organicGrowth">Organic Growth (%)</label>
+              <input
+                id="organicGrowth"
+                name="organicGrowth"
+                type="number"
+                step="0.01"
+                inputmode="decimal"
+                placeholder="4.20"
+                required
+              >
+              <p class="hint">Year on year net revenue growth, entered as a percentage. Enter <strong>4.2</strong> for 4.2%.</p>
+            </div>
+
+            <div class="field-group">
+              <label for="acquiredGrowth">Acquired Growth (%)</label>
+              <input
+                id="acquiredGrowth"
+                name="acquiredGrowth"
+                type="number"
+                step="0.01"
+                inputmode="decimal"
+                placeholder="1.30"
+                required
+              >
+              <p class="hint">Net revenue increase year on year from newly acquired businesses, entered as a percentage. Enter <strong>1.3</strong> for 1.3%.</p>
+            </div>
+
+            <div class="inline-result">
+              <span class="inline-result-label">Calculated Corporate Factor</span>
+              <strong id="cf-top-display" class="inline-result-value">0.00%</strong>
+            </div>
+          </section>
+
+          <section class="step-card">
+            <div class="step-heading">
+              <span class="step-number">2</span>
+              <div>
+                <h2>Calculate Bonus</h2>
+                <p class="step-copy">Use the calculated Corporate Factor together with PF and Base Salary.</p>
+              </div>
+            </div>
+
+          <div class="field-group">
+            <label for="personalFactor">PF</label>
+            <input
+              id="personalFactor"
+              name="personalFactor"
+              type="number"
+              min="0"
+              max="9.9"
+              step="0.1"
+              inputmode="decimal"
+              placeholder="1.0"
+              required
+            >
+            <p class="hint">Stored locally to 1 decimal place, for example 0.8, 0.9 or 1.0.</p>
+          </div>
+
+          <div class="field-group">
+            <label for="baseSalary">Base Salary</label>
+            <input
+              id="baseSalary"
+              name="baseSalary"
+              type="number"
+              min="0"
+              step="0.01"
+              inputmode="decimal"
+              placeholder="85000"
+              required
+            >
+            <p class="hint">Stored locally so users do not need to re-enter it often.</p>
+          </div>
+          </section>
+
+          <div class="button-row">
+            <button type="submit" class="primary-button">Calculate Bonus</button>
+            <button type="button" id="reset-button" class="secondary-button">Reset Saved Values</button>
+          </div>
+
+          <p id="form-message" class="form-message" aria-live="polite"></p>
+        </form>
+
+        <aside class="results-panel" aria-live="polite">
+          <div class="result-label">Estimated Bonus</div>
+          <div id="bonus-result" class="result-value">$0.00</div>
+
+          <dl class="result-breakdown">
+            <div>
+              <dt>PF</dt>
+              <dd id="pf-display">0.0</dd>
+            </div>
+            <div>
+              <dt>Corporate Factor</dt>
+              <dd id="cf-display">0.00%</dd>
+            </div>
+            <div>
+              <dt>Base Salary</dt>
+              <dd id="salary-display">$0.00</dd>
+            </div>
+          </dl>
+
+          <div class="formula-card">
+            <h2>Current Formula</h2>
+            <p><code>Corporate Factor = (ROIC - 5%) + (2 x Organic Growth) + Acquired Growth</code></p>
+            <p><code>Bonus = Corporate Factor x PF x Base Salary</code></p>
+            <p class="formula-note">
+              Corporate Factor is calculated as a percentage, then applied as a decimal in the final bonus result.
+            </p>
+          </div>
+
+          <div class="breakdown-card">
+            <h2>Calculation Breakdown</h2>
+            <p id="corporate-breakdown" class="breakdown-line">Corporate Factor = (0.00% - 5.00%) + (2 x 0.00%) + 0.00% = -5.00%</p>
+            <p id="bonus-breakdown" class="breakdown-line">Bonus = -5.00% x 0.0 x $0.00 = $0.00</p>
+          </div>
+
+          <div class="explanation-card">
+            <h2>How To Use This</h2>
+            <p><strong>Step 1:</strong> Enter your PF as a decimal value such as 0.8, 0.9 or 1.0.</p>
+            <p><strong>Step 2:</strong> Enter your Base Salary as a normal dollar amount, for example 85000.</p>
+            <p><strong>Step 3:</strong> Enter ROIC, Organic Growth and Acquired Growth as percentages without the % symbol, for example 12.5 for 12.5%.</p>
+            <p><strong>Step 4:</strong> The calculator works out the Corporate Factor %, then converts it into a decimal for the final bonus calculation.</p>
+            <p><strong>Example:</strong> If Corporate Factor is 16.2%, PF is 1.0 and Base Salary is $85,000, the bonus is $13,770.00.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
