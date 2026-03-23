@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corporate Factor Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <nav class="page-nav" aria-label="Primary">
+      <a class="nav-pill" href="index.html">Bonus Calculator</a>
+      <a class="nav-pill is-current" href="corporate-factor.html">Corporate Factor Builder</a>
+    </nav>
+
+    <section class="hero-card">
+      <p class="eyebrow">Corporate Factor Tool</p>
+      <h1>Corporate Factor Builder</h1>
+      <p class="hero-copy">
+        Build a Corporate Factor from a single ROIC or a split between two businesses, then reuse it on the bonus page.
+      </p>
+    </section>
+
+    <section class="info-card">
+      <h2>How To Use This</h2>
+      <p><strong>Single Business:</strong> Use this when one ROIC applies to the Corporate Factor formula.</p>
+      <p><strong>Split Two ROICs:</strong> Use this when the bonus is allocated across two businesses, such as 50/50 or 60/40.</p>
+      <p><strong>Save Result:</strong> After calculating, the latest Corporate Factor is stored locally and can be reused on the bonus page.</p>
+    </section>
+
+    <section class="calculator-card">
+      <div class="grid single-focus">
+        <form id="cf-form" class="input-panel" novalidate>
+          <section class="step-card">
+            <div class="step-heading">
+              <span class="step-number">1</span>
+              <div>
+                <h2>Create Corporate Factor</h2>
+                <p class="step-copy">Choose the scenario that matches how the Corporate Factor should be calculated.</p>
+              </div>
+            </div>
+
+            <div class="mode-switch" role="radiogroup" aria-label="Corporate Factor builder mode">
+              <label class="mode-option">
+                <input type="radio" name="cfMode" value="single" checked>
+                <span>Single Business</span>
+              </label>
+              <label class="mode-option">
+                <input type="radio" name="cfMode" value="split">
+                <span>Split Two ROICs</span>
+              </label>
+            </div>
+
+            <div id="single-cf-fields" class="mode-panel is-active is-highlighted">
+              <div class="field-group">
+                <label for="roic">ROIC (%)</label>
+                <input id="roic" name="roic" type="number" step="0.01" inputmode="decimal" placeholder="12.50">
+                <p class="hint">Return on Invested Capital, entered as a percentage. Enter <strong>12.5</strong> for 12.5%.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="organicGrowth">Organic Growth (%)</label>
+                <input id="organicGrowth" name="organicGrowth" type="number" step="0.01" inputmode="decimal" placeholder="4.20">
+                <p class="hint">Year on year net revenue growth, entered as a percentage.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="acquiredGrowth">Acquired Growth (%)</label>
+                <input id="acquiredGrowth" name="acquiredGrowth" type="number" step="0.01" inputmode="decimal" placeholder="1.30">
+                <p class="hint">Net revenue increase year on year from newly acquired businesses.</p>
+              </div>
+            </div>
+
+            <div id="split-cf-fields" class="mode-panel is-inactive">
+              <div class="field-group">
+                <label for="businessOneRoic">Business 1 ROIC (%)</label>
+                <input id="businessOneRoic" name="businessOneRoic" type="number" step="0.01" inputmode="decimal" placeholder="12.50" disabled>
+                <p class="hint">Enter the first business ROIC as a percentage.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="businessOneWeight">Business 1 Allocation (%)</label>
+                <input id="businessOneWeight" name="businessOneWeight" type="number" step="0.01" inputmode="decimal" placeholder="50" disabled>
+                <p class="hint">Enter the share of bonus tied to Business 1, for example <strong>50</strong> for 50%.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="businessOneOrganicGrowth">Business 1 Organic Growth (%)</label>
+                <input id="businessOneOrganicGrowth" name="businessOneOrganicGrowth" type="number" step="0.01" inputmode="decimal" placeholder="4.20" disabled>
+                <p class="hint">Organic Growth percentage for Business 1.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="businessOneAcquiredGrowth">Business 1 Acquired Growth (%)</label>
+                <input id="businessOneAcquiredGrowth" name="businessOneAcquiredGrowth" type="number" step="0.01" inputmode="decimal" placeholder="1.30" disabled>
+                <p class="hint">Acquired Growth percentage for Business 1.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="businessTwoRoic">Business 2 ROIC (%)</label>
+                <input id="businessTwoRoic" name="businessTwoRoic" type="number" step="0.01" inputmode="decimal" placeholder="9.80" disabled>
+                <p class="hint">Enter the second business ROIC as a percentage.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="businessTwoWeight">Business 2 Allocation (%)</label>
+                <input id="businessTwoWeight" name="businessTwoWeight" type="number" step="0.01" inputmode="decimal" placeholder="50" disabled>
+                <p class="hint">The two allocations must total 100%.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="businessTwoOrganicGrowth">Business 2 Organic Growth (%)</label>
+                <input id="businessTwoOrganicGrowth" name="businessTwoOrganicGrowth" type="number" step="0.01" inputmode="decimal" placeholder="3.80" disabled>
+                <p class="hint">Organic Growth percentage for Business 2.</p>
+              </div>
+
+              <div class="field-group">
+                <label for="businessTwoAcquiredGrowth">Business 2 Acquired Growth (%)</label>
+                <input id="businessTwoAcquiredGrowth" name="businessTwoAcquiredGrowth" type="number" step="0.01" inputmode="decimal" placeholder="0.90" disabled>
+                <p class="hint">Acquired Growth percentage for Business 2.</p>
+              </div>
+            </div>
+
+            <div class="inline-result">
+              <span class="inline-result-label">Calculated Corporate Factor</span>
+              <strong id="cf-top-display" class="inline-result-value">0.00%</strong>
+            </div>
+          </section>
+
+          <div class="button-row">
+            <button type="submit" class="primary-button">Calculate Corporate Factor</button>
+            <button type="button" id="reset-button" class="secondary-button">Reset Saved Values</button>
+          </div>
+
+          <p id="form-message" class="form-message" aria-live="polite"></p>
+        </form>
+
+        <aside class="results-panel" aria-live="polite">
+          <div class="result-label">Corporate Factor</div>
+          <div id="cf-result" class="result-value">0.00%</div>
+
+          <dl class="result-breakdown">
+            <div>
+              <dt>Mode</dt>
+              <dd id="mode-display">Single Business</dd>
+            </div>
+            <div>
+              <dt>Weighted ROIC</dt>
+              <dd id="weighted-roic-display">0.00%</dd>
+            </div>
+          </dl>
+
+          <div class="formula-card">
+            <h2>Current Formula</h2>
+            <p><code>Corporate Factor = (ROIC - 5%) + (2 x Organic Growth) + Acquired Growth</code></p>
+            <p class="formula-note">
+              In split mode, the ROIC is weighted across two businesses first, then used in the same Corporate Factor formula.
+            </p>
+          </div>
+
+          <div class="breakdown-card">
+            <h2>Calculation Breakdown</h2>
+            <p id="corporate-breakdown" class="breakdown-line">Corporate Factor = (0.00% - 5.00%) + (2 x 0.00%) + 0.00% = -5.00%</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="corporate-factor.js"></script>
+</body>
+</html>

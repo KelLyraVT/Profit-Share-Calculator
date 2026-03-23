@@ -11,147 +11,84 @@
 </head>
 <body>
   <main class="page-shell">
+    <nav class="page-nav" aria-label="Primary">
+      <a class="nav-pill is-current" href="index.html">Bonus Calculator</a>
+      <a class="nav-pill" href="corporate-factor.html">Corporate Factor Builder</a>
+    </nav>
+
     <section class="hero-card">
       <p class="eyebrow">Profit Share Tool</p>
       <h1>Profit Share Calculator</h1>
       <p class="hero-copy">
-        Calculate Corporate Factor first, then use it with PF and Base Salary to estimate profit share instantly.
+        Enter a Corporate Factor, then calculate profit share using PF and Base Salary.
       </p>
     </section>
 
     <section class="info-card">
       <h2>How To Use This</h2>
-      <p><strong>Step 1:</strong> Enter your PF as a decimal value such as 0.8, 0.9 or 1.0.</p>
-      <p><strong>Step 2:</strong> Enter your Base Salary as a normal dollar amount, for example 85000.</p>
-      <p><strong>Step 3:</strong> Either calculate Corporate Factor using ROIC, Organic Growth and Acquired Growth, or enter Corporate Factor directly as a percentage without the % symbol.</p>
-      <p><strong>Step 4:</strong> The calculator converts the Corporate Factor percentage into a decimal for the final bonus calculation.</p>
+      <p><strong>Step 1:</strong> If needed, calculate a Corporate Factor on the <strong>Corporate Factor Builder</strong> page.</p>
+      <p><strong>Step 2:</strong> Enter the Corporate Factor here as a percentage, for example 16.2 for 16.2%.</p>
+      <p><strong>Step 3:</strong> Enter your PF as a decimal value such as 0.8, 0.9 or 1.0.</p>
+      <p><strong>Step 4:</strong> Enter your Base Salary as a normal dollar amount, for example 85000.</p>
       <p><strong>Example:</strong> If Corporate Factor is 16.2%, PF is 1.0 and Base Salary is $85,000, the bonus is $13,770.00.</p>
     </section>
 
     <section class="calculator-card">
-      <div class="grid">
+      <div class="grid single-focus">
         <form id="bonus-form" class="input-panel" novalidate>
           <section class="step-card">
             <div class="step-heading">
               <span class="step-number">1</span>
               <div>
-                <h2>Calculate Corporate Factor</h2>
-                <p class="step-copy">Choose whether to calculate the Corporate Factor from business inputs or enter it directly.</p>
+                <h2>Enter Bonus Inputs</h2>
+                <p class="step-copy">Use a Corporate Factor you already know, or calculate one on the builder page.</p>
               </div>
             </div>
 
-            <div class="mode-switch" role="radiogroup" aria-label="Corporate Factor input mode">
-              <label class="mode-option">
-                <input type="radio" name="cfMode" value="calculated" checked>
-                <span>Calculate CF</span>
-              </label>
-              <label class="mode-option">
-                <input type="radio" name="cfMode" value="manual">
-                <span>Enter CF Directly</span>
-              </label>
+            <div class="field-group">
+              <label for="corporateFactor">Corporate Factor (%)</label>
+              <input
+                id="corporateFactor"
+                name="corporateFactor"
+                type="number"
+                step="0.01"
+                inputmode="decimal"
+                placeholder="16.20"
+                required
+              >
+              <p class="hint">Enter the Corporate Factor directly as a percentage. Enter <strong>16.2</strong> for 16.2%.</p>
             </div>
 
-            <div id="calculated-cf-fields" class="mode-panel">
-              <div class="field-group">
-                <label for="roic">ROIC (%)</label>
-                <input
-                  id="roic"
-                  name="roic"
-                  type="number"
-                  step="0.01"
-                  inputmode="decimal"
-                  placeholder="12.50"
-                >
-                <p class="hint">Return on Invested Capital, entered as a percentage. Enter <strong>12.5</strong> for 12.5%.</p>
-              </div>
-
-              <div class="field-group">
-                <label for="organicGrowth">Organic Growth (%)</label>
-                <input
-                  id="organicGrowth"
-                  name="organicGrowth"
-                  type="number"
-                  step="0.01"
-                  inputmode="decimal"
-                  placeholder="4.20"
-                >
-                <p class="hint">Year on year net revenue growth, entered as a percentage. Enter <strong>4.2</strong> for 4.2%.</p>
-              </div>
-
-              <div class="field-group">
-                <label for="acquiredGrowth">Acquired Growth (%)</label>
-                <input
-                  id="acquiredGrowth"
-                  name="acquiredGrowth"
-                  type="number"
-                  step="0.01"
-                  inputmode="decimal"
-                  placeholder="1.30"
-                >
-                <p class="hint">Net revenue increase year on year from newly acquired businesses, entered as a percentage. Enter <strong>1.3</strong> for 1.3%.</p>
-              </div>
+            <div class="field-group">
+              <label for="personalFactor">PF</label>
+              <input
+                id="personalFactor"
+                name="personalFactor"
+                type="number"
+                min="0"
+                max="9.9"
+                step="0.1"
+                inputmode="decimal"
+                placeholder="1.0"
+                required
+              >
+              <p class="hint">Stored locally to 1 decimal place, for example 0.8, 0.9 or 1.0.</p>
             </div>
 
-            <div id="manual-cf-fields" class="mode-panel" hidden>
-              <div class="field-group">
-                <label for="manualCorporateFactor">Corporate Factor (%)</label>
-                <input
-                  id="manualCorporateFactor"
-                  name="manualCorporateFactor"
-                  type="number"
-                  step="0.01"
-                  inputmode="decimal"
-                  placeholder="16.20"
-                >
-                <p class="hint">Enter the Corporate Factor directly as a percentage. Enter <strong>16.2</strong> for 16.2%.</p>
-              </div>
+            <div class="field-group">
+              <label for="baseSalary">Base Salary</label>
+              <input
+                id="baseSalary"
+                name="baseSalary"
+                type="number"
+                min="0"
+                step="0.01"
+                inputmode="decimal"
+                placeholder="85000"
+                required
+              >
+              <p class="hint">Stored locally so users do not need to re-enter it often.</p>
             </div>
-
-            <div class="inline-result">
-              <span class="inline-result-label">Calculated Corporate Factor</span>
-              <strong id="cf-top-display" class="inline-result-value">0.00%</strong>
-            </div>
-          </section>
-
-          <section class="step-card">
-            <div class="step-heading">
-              <span class="step-number">2</span>
-              <div>
-                <h2>Calculate Bonus</h2>
-                <p class="step-copy">Use the calculated Corporate Factor together with PF and Base Salary.</p>
-              </div>
-            </div>
-
-          <div class="field-group">
-            <label for="personalFactor">PF</label>
-            <input
-              id="personalFactor"
-              name="personalFactor"
-              type="number"
-              min="0"
-              max="9.9"
-              step="0.1"
-              inputmode="decimal"
-              placeholder="1.0"
-              required
-            >
-            <p class="hint">Stored locally to 1 decimal place, for example 0.8, 0.9 or 1.0.</p>
-          </div>
-
-          <div class="field-group">
-            <label for="baseSalary">Base Salary</label>
-            <input
-              id="baseSalary"
-              name="baseSalary"
-              type="number"
-              min="0"
-              step="0.01"
-              inputmode="decimal"
-              placeholder="85000"
-              required
-            >
-            <p class="hint">Stored locally so users do not need to re-enter it often.</p>
-          </div>
           </section>
 
           <div class="button-row">
@@ -168,12 +105,12 @@
 
           <dl class="result-breakdown">
             <div>
-              <dt>PF</dt>
-              <dd id="pf-display">0.0</dd>
-            </div>
-            <div>
               <dt>Corporate Factor</dt>
               <dd id="cf-display">0.00%</dd>
+            </div>
+            <div>
+              <dt>PF</dt>
+              <dd id="pf-display">0.0</dd>
             </div>
             <div>
               <dt>Base Salary</dt>
@@ -183,18 +120,15 @@
 
           <div class="formula-card">
             <h2>Current Formula</h2>
-            <p><code>Corporate Factor = (ROIC - 5%) + (2 x Organic Growth) + Acquired Growth</code></p>
-            <p><code>Or enter Corporate Factor directly as a percentage</code></p>
             <p><code>Bonus = Corporate Factor x PF x Base Salary</code></p>
             <p class="formula-note">
-              Corporate Factor is calculated as a percentage, then applied as a decimal in the final bonus result.
+              Corporate Factor is entered as a percentage, then applied as a decimal in the final bonus result.
             </p>
           </div>
 
           <div class="breakdown-card">
             <h2>Calculation Breakdown</h2>
-            <p id="corporate-breakdown" class="breakdown-line">Corporate Factor = (0.00% - 5.00%) + (2 x 0.00%) + 0.00% = -5.00%</p>
-            <p id="bonus-breakdown" class="breakdown-line">Bonus = -5.00% x 0.0 x $0.00 = $0.00</p>
+            <p id="bonus-breakdown" class="breakdown-line">Bonus = 0.00% x 0.0 x $0.00 = $0.00</p>
           </div>
         </aside>
       </div>

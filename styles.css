@@ -44,6 +44,38 @@ body::before {
   padding: 48px 20px 64px;
 }
 
+.page-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.nav-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(37, 92, 67, 0.14);
+  background: rgba(255, 252, 246, 0.72);
+  color: var(--accent-strong);
+  text-decoration: none;
+  font-weight: 800;
+  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.nav-pill:hover {
+  transform: translateY(-1px);
+}
+
+.nav-pill.is-current {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #f7fbf8;
+  box-shadow: 0 16px 28px rgba(23, 63, 45, 0.18);
+}
+
 .hero-card,
 .info-card,
 .calculator-card {
@@ -112,6 +144,10 @@ h1 {
   display: grid;
   grid-template-columns: minmax(320px, 1.15fr) minmax(280px, 0.85fr);
   gap: 22px;
+}
+
+.grid.single-focus {
+  grid-template-columns: minmax(360px, 1.1fr) minmax(300px, 0.9fr);
 }
 
 .input-panel,
