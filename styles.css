@@ -45,6 +45,7 @@ body::before {
 }
 
 .hero-card,
+.info-card,
 .calculator-card {
   backdrop-filter: blur(20px);
   background: var(--surface);
@@ -56,6 +57,21 @@ body::before {
 .hero-card {
   padding: 36px;
   margin-bottom: 24px;
+}
+
+.info-card {
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+
+.info-card p {
+  margin: 0 0 10px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.info-card p:last-child {
+  margin-bottom: 0;
 }
 
 .eyebrow {
@@ -74,9 +90,10 @@ h2 {
 }
 
 h1 {
-  max-width: 14ch;
+  max-width: none;
   font-size: clamp(2.4rem, 6vw, 4.5rem);
   line-height: 0.96;
+  white-space: nowrap;
 }
 
 .hero-copy {
@@ -150,9 +167,61 @@ h1 {
   flex: 0 0 auto;
 }
 
+.mode-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.mode-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(37, 92, 67, 0.08);
+  border: 1px solid rgba(37, 92, 67, 0.12);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.mode-option input {
+  width: auto;
+  margin: 0;
+}
+
+.mode-panel {
+  display: grid;
+  gap: 18px;
+  transition: opacity 160ms ease, filter 160ms ease, transform 160ms ease;
+}
+
+.mode-panel.is-inactive {
+  opacity: 0.42;
+  filter: grayscale(0.18);
+}
+
+.mode-panel.is-active {
+  opacity: 1;
+}
+
+.mode-panel.is-highlighted {
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(37, 92, 67, 0.22);
+  background: rgba(216, 235, 224, 0.52);
+  box-shadow: inset 0 0 0 1px rgba(37, 92, 67, 0.06);
+}
+
 .field-group {
   display: grid;
   gap: 8px;
+}
+
+.mode-panel.is-inactive input {
+  background: rgba(245, 245, 245, 0.92);
+  border-color: rgba(95, 110, 100, 0.16);
+  color: rgba(29, 42, 34, 0.58);
 }
 
 label {
@@ -325,15 +394,21 @@ code {
   }
 
   .hero-card,
+  .info-card,
   .calculator-card {
     border-radius: 22px;
   }
 
   .hero-card,
+  .info-card,
   .calculator-card,
   .input-panel,
   .results-panel {
     padding: 20px;
+  }
+
+  h1 {
+    white-space: normal;
   }
 
   .grid {
